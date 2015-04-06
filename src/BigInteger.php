@@ -17,7 +17,7 @@ class BigInteger
     /**
      * Initializes a new instance of this class.
      *
-     * @param string|int|self $value The value to set.
+     * @param string|int|BigInteger $value The value to set.
      */
     public function __construct($value = 0)
     {
