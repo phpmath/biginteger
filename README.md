@@ -8,3 +8,17 @@
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/e94c9ef4-54e2-4785-bff5-d96db4b468d7/mini.png)](https://insight.sensiolabs.com/projects/e94c9ef4-54e2-4785-bff5-d96db4b468d7)
 
 A PHP library to work with big integers.
+
+## Getting started
+
+It's recommended to install this library via [Composer](https://getcomposer.org).
+
+```json
+{
+    "require": {
+        "phpmath/biginteger": "dev-master"
+    }
+}
+```
+
+The current master branch is considered stable. The badges on top of this document should confirm this.
