@@ -23,7 +23,7 @@ class BigIntegerNegateTest extends PHPUnit_Framework_TestCase
     public function testWithMutableFalse()
     {
         // Arrange
-        $bigInteger = new BigInteger('0', false);
+        $bigInteger = new BigInteger('10', false);
 
         // Act
         $newBigInteger = $bigInteger->negate();
@@ -31,13 +31,14 @@ class BigIntegerNegateTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertNotEquals(spl_object_hash($newBigInteger), spl_object_hash($bigInteger));
+        $this->assertEquals('10', $bigInteger->getValue());
+        $this->assertEquals('-10', $newBigInteger->getValue());
     }
 
     public function testWithMutableTrue()
     {
         // Arrange
-        $bigInteger = new BigInteger('0', true);
+        $bigInteger = new BigInteger('10', true);
 
         // Act
         $newBigInteger = $bigInteger->negate();
@@ -45,6 +46,7 @@ class BigIntegerNegateTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertEquals(spl_object_hash($newBigInteger), spl_object_hash($bigInteger));
+        $this->assertEquals('-10', $bigInteger->getValue());
+        $this->assertEquals('-10', $newBigInteger->getValue());
     }
 }

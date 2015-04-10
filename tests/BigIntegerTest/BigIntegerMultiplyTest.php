@@ -65,28 +65,30 @@ class BigIntegerMultiplyTest extends PHPUnit_Framework_TestCase
     public function testWithMutableFalse()
     {
         // Arrange
-        $bigInteger = new BigInteger('0', false);
+        $bigInteger = new BigInteger('2', false);
 
         // Act
-        $newBigInteger = $bigInteger->multiply('123');
+        $newBigInteger = $bigInteger->multiply('2');
 
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertNotEquals(spl_object_hash($newBigInteger), spl_object_hash($bigInteger));
+        $this->assertEquals('2', $bigInteger->getValue());
+        $this->assertEquals('4', $newBigInteger->getValue());
     }
 
     public function testWithMutableTrue()
     {
         // Arrange
-        $bigInteger = new BigInteger('0', true);
+        $bigInteger = new BigInteger('2', true);
 
         // Act
-        $newBigInteger = $bigInteger->multiply('123');
+        $newBigInteger = $bigInteger->multiply('2');
 
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertEquals(spl_object_hash($newBigInteger), spl_object_hash($bigInteger));
+        $this->assertEquals('4', $bigInteger->getValue());
+        $this->assertEquals('4', $newBigInteger->getValue());
     }
 }

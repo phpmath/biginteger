@@ -65,28 +65,30 @@ class BigIntegerModTest extends PHPUnit_Framework_TestCase
     public function testWithMutableFalse()
     {
         // Arrange
-        $bigInteger = new BigInteger('0', false);
+        $bigInteger = new BigInteger('15', false);
 
         // Act
-        $newBigInteger = $bigInteger->mod('123');
+        $newBigInteger = $bigInteger->mod('7');
 
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertNotEquals(spl_object_hash($newBigInteger), spl_object_hash($bigInteger));
+        $this->assertEquals('15', $bigInteger->getValue());
+        $this->assertEquals('1', $newBigInteger->getValue());
     }
 
     public function testWithMutableTrue()
     {
         // Arrange
-        $bigInteger = new BigInteger('0', true);
+        $bigInteger = new BigInteger('15', true);
 
         // Act
-        $newBigInteger = $bigInteger->mod('123');
+        $newBigInteger = $bigInteger->mod('7');
 
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertEquals(spl_object_hash($newBigInteger), spl_object_hash($bigInteger));
+        $this->assertEquals('1', $bigInteger->getValue());
+        $this->assertEquals('1', $newBigInteger->getValue());
     }
 }

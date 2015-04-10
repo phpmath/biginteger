@@ -5,130 +5,48 @@ namespace PHP\Math\BigIntegerTest;
 use PHP\Math\BigInteger\BigInteger;
 use PHPUnit_Framework_TestCase;
 
-class BigIntegerDivideTest extends PHPUnit_Framework_TestCase
+class BigIntegerFactorialTest extends PHPUnit_Framework_TestCase
 {
-    public function testWithInteger()
+    public function testFactorial()
     {
         // Arrange
-        $bigInteger = new BigInteger('123');
+        $bigInteger = new BigInteger('5');
 
         // Act
-        $bigInteger->divide(123);
+        $bigIntegerValue = $bigInteger->factorial();
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('1', $bigInteger->getValue());
-    }
-
-    public function testWithString()
-    {
-        // Arrange
-        $bigInteger = new BigInteger('123');
-
-        // Act
-        $bigInteger->divide('123');
-
-        // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('1', $bigInteger->getValue());
-    }
-
-    public function testWithBigInteger()
-    {
-        // Arrange
-        $bigInteger = new BigInteger('123');
-        $bigIntegerValue = new BigInteger('123');
-
-        // Act
-        $bigInteger->divide($bigIntegerValue);
-
-        // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('1', $bigInteger->getValue());
-    }
-
-    public function testWithNegativeNumbber()
-    {
-        // Arrange
-        $bigInteger = new BigInteger('123');
-        $bigIntegerValue = new BigInteger('-123');
-
-        // Act
-        $bigInteger->divide($bigIntegerValue);
-
-        // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('-1', $bigInteger->getValue());
-    }
-
-    public function testWithTwoNegativeNumbber()
-    {
-        // Arrange
-        $bigInteger = new BigInteger('-123');
-        $bigIntegerValue = new BigInteger('-123');
-
-        // Act
-        $bigInteger->divide($bigIntegerValue);
-
-        // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('1', $bigInteger->getValue());
-    }
-
-    public function testWithHalfNumbbers()
-    {
-        // Arrange
-        $bigInteger = new BigInteger('3');
-        $bigIntegerValue = new BigInteger('2');
-
-        // Act
-        $bigInteger->divide($bigIntegerValue);
-
-        // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('1', $bigInteger->getValue());
-    }
-
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testWithInvalidValue()
-    {
-        // Arrange
-        $bigInteger = new BigInteger('123');
-
-        // Act
-        $bigInteger->divide('123.123');
-
-        // Assert
-        // ...
+        $this->assertInternalType('string', $bigIntegerValue->getValue());
+        $this->assertEquals('120', $bigIntegerValue->getValue());
     }
 
     public function testWithMutableFalse()
     {
         // Arrange
-        $bigInteger = new BigInteger('0', false);
+        $bigInteger = new BigInteger('5', false);
 
         // Act
-        $newBigInteger = $bigInteger->divide('123');
+        $newBigInteger = $bigInteger->factorial();
 
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertNotEquals(spl_object_hash($newBigInteger), spl_object_hash($bigInteger));
+        $this->assertEquals('5', $bigInteger->getValue());
+        $this->assertEquals('120', $newBigInteger->getValue());
     }
 
     public function testWithMutableTrue()
     {
         // Arrange
-        $bigInteger = new BigInteger('0', true);
+        $bigInteger = new BigInteger('5', true);
 
         // Act
-        $newBigInteger = $bigInteger->divide('123');
+        $newBigInteger = $bigInteger->factorial();
 
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertEquals(spl_object_hash($newBigInteger), spl_object_hash($bigInteger));
+        $this->assertEquals('120', $bigInteger->getValue());
+        $this->assertEquals('120', $newBigInteger->getValue());
     }
 }
