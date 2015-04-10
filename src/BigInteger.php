@@ -139,7 +139,7 @@ class BigInteger
      */
     public function factorial()
     {
-        $calculatedValue = gmp_fact($this->value);
+        $calculatedValue = gmp_fact($this->getValue());
 
         return $this->assignValue($calculatedValue);
     }
