@@ -51,7 +51,7 @@ class BigInteger
     /**
      * Sets the value.
      *
-     * @param string $value
+     * @param string $value The value to set.
      * @return BigInteger
      */
     public function setValue($value)
@@ -147,7 +147,8 @@ class BigInteger
     /**
      * Performs a modulo operation with the given number.
      *
-     * @param string $value The value to perform a modulo operation with..
+     * @param string $value The value to perform a modulo operation with.
+     * @return BigInteger
      */
     public function mod($value)
     {
@@ -164,6 +165,7 @@ class BigInteger
      * Multiplies the given value with this value.
      *
      * @param string $value The value to multiply with.
+     * @return BigInteger
      */
     public function multiply($value)
     {
@@ -178,6 +180,8 @@ class BigInteger
 
     /**
      * Negates the value.
+     *
+     * @return BigInteger
      */
     public function negate()
     {
@@ -189,7 +193,8 @@ class BigInteger
     /**
      * Performs a power operation with the given number.
      *
-     * @param string $value The value to perform a power operation with..
+     * @param string $value The value to perform a power operation with.
+     * @return BigInteger
      */
     public function pow($value)
     {
@@ -204,6 +209,7 @@ class BigInteger
      * Subtracts the given value from this value.
      *
      * @param string $value The value to subtract.
+     * @return BigInteger
      */
     public function subtract($value)
     {
