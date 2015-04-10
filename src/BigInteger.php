@@ -2,6 +2,9 @@
 
 namespace PHP\Math\BigInteger;
 
+use InvalidArgumentException;
+use RuntimeException;
+
 /**
  * A big integer value.
  */
@@ -15,13 +18,23 @@ class BigInteger
     private $value;
 
     /**
+     * A flag that indicates whether or not the state of this object can be changed.
+     *
+     * @var bool
+     */
+    private $mutable;
+
+    /**
      * Initializes a new instance of this class.
      *
      * @param string|int|BigInteger $value The value to set.
+     * @param bool $mutable Whether or not the state of this object can be changed.
      */
-    public function __construct($value = 0)
+    public function __construct($value = 0, $mutable = true)
     {
-        $this->setValue($value);
+        $this->internalSetValue($value);
+
+        $this->mutable = $mutable;
     }
 
     /**
@@ -38,26 +51,34 @@ class BigInteger
      * Sets the value.
      *
      * @param string $value
+     * @return BigInteger
      */
     public function setValue($value)
     {
-        $this->checkValue($value);
+        if (!$this->isMutable()) {
+            throw new RuntimeException('Cannot set the value since the number is immutable.');
+        }
 
-        $this->value = gmp_init($value);
+        return $this->internalSetValue($value);
     }
 
     /**
      * Converts the value to an absolute number.
+     *
+     * @return BigInteger
      */
     public function abs()
     {
-        $this->value = gmp_abs($this->value);
+        $value = gmp_abs($this->value);
+
+        return $this->assignValue($value);
     }
 
     /**
      * Adds the given value to this value.
      *
      * @param string $value The value to add.
+     * @return BigInteger
      */
     public function add($value)
     {
@@ -65,7 +86,9 @@ class BigInteger
 
         $gmp = gmp_init($value);
 
-        $this->value = gmp_add($this->value, $gmp);
+        $calculatedValue = gmp_add($this->value, $gmp);
+
+        return $this->assignValue($calculatedValue);
     }
 
     /**
@@ -95,6 +118,7 @@ class BigInteger
      * Divides this value by the given value.
      *
      * @param string $value The value to divide by.
+     * @return BigInteger
      */
     public function divide($value)
     {
@@ -102,7 +126,9 @@ class BigInteger
 
         $gmp = gmp_init($value);
 
-        $this->value = gmp_div($this->value, $gmp, false);
+        $calculatedValue = gmp_div($this->value, $gmp, false);
+
+        return $this->assignValue($calculatedValue);
     }
 
     /**
@@ -116,7 +142,9 @@ class BigInteger
 
         $gmp = gmp_init($value);
 
-        $this->value = gmp_mod($this->value, $gmp);
+        $calculatedValue = gmp_mod($this->value, $gmp);
+
+        return $this->assignValue($calculatedValue);
     }
 
     /**
@@ -130,7 +158,9 @@ class BigInteger
 
         $gmp = gmp_init($value);
 
-        $this->value = gmp_mul($this->value, $gmp);
+        $calculatedValue = gmp_mul($this->value, $gmp);
+
+        return $this->assignValue($calculatedValue);
     }
 
     /**
@@ -138,7 +168,9 @@ class BigInteger
      */
     public function negate()
     {
-        $this->value = gmp_neg($this->value);
+        $calculatedValue = gmp_neg($this->value);
+
+        return $this->assignValue($calculatedValue);
     }
 
     /**
@@ -150,7 +182,9 @@ class BigInteger
     {
         $this->checkValue($value);
 
-        $this->value = gmp_pow($this->value, (string)$value);
+        $calculatedValue = gmp_pow($this->value, (string)$value);
+
+        return $this->assignValue($calculatedValue);
     }
 
     /**
@@ -164,7 +198,19 @@ class BigInteger
 
         $gmp = gmp_init($value);
 
-        $this->value = gmp_sub($this->value, $gmp);
+        $calculatedValue = gmp_sub($this->value, $gmp);
+
+        return $this->assignValue($calculatedValue);
+    }
+
+    /**
+     * Checks if this object is mutable.
+     *
+     * @return bool
+     */
+    public function isMutable()
+    {
+        return $this->mutable;
     }
 
     /**
@@ -188,17 +234,51 @@ class BigInteger
     }
 
     /**
+     * A helper method to assign the given value.
+     *
+     * @param int|string|BigInteger $value The value to assign.
+     * @return BigInteger
+     */
+    private function assignValue($value)
+    {
+        $result = null;
+
+        if ($this->isMutable()) {
+            $result = $this->internalSetValue($value);
+        } else {
+            $result = new BigInteger($value, false);
+        }
+
+        return $result;
+    }
+
+    /**
+     * A helper method to set the value on this class.
+     *
+     * @param int|string|BigInteger $value The value to assign.
+     * @return BigInteger
+     */
+    private function internalSetValue($value)
+    {
+        $this->checkValue($value);
+
+        $this->value = gmp_init($value);
+
+        return $this;
+    }
+
+    /**
      * Checks if the given value is valid.
      *
      * @param int|string $value The value to check.
-     * @throws \InvalidArgumentException Thrown when the value is invalid.
+     * @throws InvalidArgumentException Thrown when the value is invalid.
      */
     private function checkValue(&$value)
     {
         $value = (string)$value;
 
         if (!preg_match('/^(-|\+)?[0-9]+$/', $value)) {
-            throw new \InvalidArgumentException('Invalid number provided: ' . $value);
+            throw new InvalidArgumentException('Invalid number provided: ' . $value);
         }
     }
 }
