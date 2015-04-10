@@ -133,6 +133,18 @@ class BigInteger
     }
 
     /**
+     * Calculates factorial of this value.
+     *
+     * @return BigInteger
+     */
+    public function factorial()
+    {
+        $calculatedValue = gmp_fact($this->value);
+
+        return $this->assignValue($calculatedValue);
+    }
+
+    /**
      * Performs a modulo operation with the given number.
      *
      * @param string $value The value to perform a modulo operation with..
