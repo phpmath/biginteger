@@ -23,7 +23,7 @@ It's recommended to install this library via [Composer](https://getcomposer.org)
 
 The current master branch is considered stable. The badges on top of this document should confirm this.
 
-# Requirements
+## Requirements
 
 This library runs on PHP 5.3, PHP 5.4, PHP 5.5, PHP 5.6, PHP 7 and HHVM. The only requirement is that the GMP extension
 is installed.
