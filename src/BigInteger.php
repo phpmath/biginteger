@@ -2,6 +2,7 @@
 
 namespace PHP\Math\BigInteger;
 
+use GMP;
 use InvalidArgumentException;
 use RuntimeException;
 
