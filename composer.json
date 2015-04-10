@@ -3,7 +3,8 @@
     "description": "A PHP library to work with big integers.",
     "license": "MIT",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "ext-gmp": "*"
     },
     "require-dev": {
 		"phpunit/phpunit": "~4.5",
