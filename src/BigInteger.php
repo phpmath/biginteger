@@ -276,7 +276,7 @@ class BigInteger
      */
     private function checkValue(&$value)
     {
-        if ($value instanceof GMP) {
+        if ($value instanceof GMP || is_resource($value)) {
             $value = gmp_strval($value);
         } else {
             $value = (string)$value;
