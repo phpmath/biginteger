@@ -275,7 +275,11 @@ class BigInteger
      */
     private function checkValue(&$value)
     {
-        $value = (string)$value;
+        if ($value instanceof GMP) {
+            $value = gmp_strval($value);
+        } else {
+            $value = (string)$value;
+        }
 
         if (!preg_match('/^(-|\+)?[0-9]+$/', $value)) {
             throw new InvalidArgumentException('Invalid number provided: ' . $value);

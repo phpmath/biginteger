@@ -56,7 +56,7 @@ class BigIntegerSetValueTest extends PHPUnit_Framework_TestCase
         $bigInteger = new BigInteger('0', false);
 
         // Act
-        $newBigInteger = $bigInteger->setValue('123');
+        $bigInteger->setValue('123');
 
         // Assert
         // ...
