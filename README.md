@@ -1,10 +1,10 @@
 # biginteger
 
-[![Build Status](https://travis-ci.org/phpmath/biginteger.svg?branch=master)](https://travis-ci.org/phpmath/biginteger)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/phpmath/biginteger/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/phpmath/biginteger/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/phpmath/biginteger/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/phpmath/biginteger/?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/552269cc971f781c480003f0/badge.svg?style=flat)](https://www.versioneye.com/user/projects/552269cc971f781c480003f0)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/e94c9ef4-54e2-4785-bff5-d96db4b468d7/mini.png)](https://insight.sensiolabs.com/projects/e94c9ef4-54e2-4785-bff5-d96db4b468d7)
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE)
+[![Build Status][ico-travis]][link-travis]
+[![Total Downloads][ico-downloads]][link-downloads]
+[![SensioLabsInsight][ico-sensio]][link-sensio]
 
 A PHP library to work with big integers.
 
@@ -15,7 +15,7 @@ It's recommended to install this library via [Composer](https://getcomposer.org)
 ```json
 {
     "require": {
-        "phpmath/biginteger": "dev-master"
+        "phpmath/biginteger": "1.0.0"
     }
 }
 ```
@@ -38,5 +38,20 @@ This library supports the following operations:
 * Make numbers absolute.
 * Compare numbers
 
-Beside these operations it's also possible to make the object mutable or immutable. Performing operations on an 
+Beside these operations it's also possible to make the object mutable or immutable. Performing operations on an
 immutable number results in the function returning a new instance.
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
+
+[ico-version]: https://img.shields.io/packagist/v/phpmath/biginteger.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/phpmath/biginteger/master.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/phpmath/biginteger.svg?style=flat-square
+[ico-sensio]: https://img.shields.io/sensiolabs/i/e94c9ef4-54e2-4785-bff5-d96db4b468d7.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/phpmath/biginteger
+[link-travis]: https://travis-ci.org/phpmath/biginteger
+[link-downloads]: https://packagist.org/packages/phpmath/biginteger
+[link-sensio]: https://insight.sensiolabs.com/projects/e94c9ef4-54e2-4785-bff5-d96db4b468d7
