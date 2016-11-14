@@ -57,7 +57,7 @@ If you discover any security related issues, please create an issue in the issue
 
 ## Credits
 
-- [phpmath][link-author]
+- [Walter Tamboer][link-author]
 - [All Contributors][link-contributors]
 
 ## License
@@ -76,5 +76,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-scrutinizer]: https://scrutinizer-ci.com/g/phpmath/biginteger/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/phpmath/biginteger
 [link-downloads]: https://packagist.org/packages/phpmath/biginteger
-[link-author]: https://github.com/phpmath
+[link-author]: https://github.com/waltertamboer
 [link-contributors]: ../../contributors
