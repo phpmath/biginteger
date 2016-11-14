@@ -1,11 +1,18 @@
 <?php
+/**
+ * phpmath / biginteger (https://github.com/phpmath/biginteger)
+ *
+ * @link https://github.com/phpmath/biginteger for the canonical source repository
+ * @copyright Copyright (c) 2015-2017 phpmath (https://github.com/phpmath)
+ * @license https://github.com/phpmath/biginteger/blob/master/LICENSE.md MIT
+ */
 
 namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
 use PHPUnit_Framework_TestCase;
 
-class BigIntegerSubtractTest extends PHPUnit_Framework_TestCase
+class BigIntegerPowTest extends PHPUnit_Framework_TestCase
 {
     public function testWithInteger()
     {
@@ -13,11 +20,11 @@ class BigIntegerSubtractTest extends PHPUnit_Framework_TestCase
         $bigInteger = new BigInteger('123');
 
         // Act
-        $bigInteger->subtract(123);
+        $bigInteger->pow(20);
 
         // Assert
         $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('0', $bigInteger->getValue());
+        $this->assertEquals('628206215175202159781085149496179361969201', $bigInteger->getValue());
     }
 
     public function testWithString()
@@ -26,25 +33,25 @@ class BigIntegerSubtractTest extends PHPUnit_Framework_TestCase
         $bigInteger = new BigInteger('123');
 
         // Act
-        $bigInteger->subtract('123');
+        $bigInteger->pow('20');
 
         // Assert
         $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('0', $bigInteger->getValue());
+        $this->assertEquals('628206215175202159781085149496179361969201', $bigInteger->getValue());
     }
 
     public function testWithBigInteger()
     {
         // Arrange
         $bigInteger = new BigInteger('123');
-        $bigIntegerValue = new BigInteger('123');
+        $bigIntegerValue = new BigInteger('20');
 
         // Act
-        $bigInteger->subtract($bigIntegerValue);
+        $bigInteger->pow($bigIntegerValue);
 
         // Assert
         $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('0', $bigInteger->getValue());
+        $this->assertEquals('628206215175202159781085149496179361969201', $bigInteger->getValue());
     }
 
     /**
@@ -56,7 +63,7 @@ class BigIntegerSubtractTest extends PHPUnit_Framework_TestCase
         $bigInteger = new BigInteger('123');
 
         // Act
-        $bigInteger->subtract('123.123');
+        $bigInteger->pow('123.123');
 
         // Assert
         // ...
@@ -65,30 +72,30 @@ class BigIntegerSubtractTest extends PHPUnit_Framework_TestCase
     public function testWithMutableFalse()
     {
         // Arrange
-        $bigInteger = new BigInteger('123', false);
+        $bigInteger = new BigInteger('2', false);
 
         // Act
-        $newBigInteger = $bigInteger->subtract('123');
+        $newBigInteger = $bigInteger->pow('2');
 
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertEquals('123', $bigInteger->getValue());
-        $this->assertEquals('0', $newBigInteger->getValue());
+        $this->assertEquals('2', $bigInteger->getValue());
+        $this->assertEquals('4', $newBigInteger->getValue());
     }
 
     public function testWithMutableTrue()
     {
         // Arrange
-        $bigInteger = new BigInteger('123', true);
+        $bigInteger = new BigInteger('2', true);
 
         // Act
-        $newBigInteger = $bigInteger->subtract('123');
+        $newBigInteger = $bigInteger->pow('2');
 
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertEquals('0', $bigInteger->getValue());
-        $this->assertEquals('0', $newBigInteger->getValue());
+        $this->assertEquals('4', $bigInteger->getValue());
+        $this->assertEquals('4', $newBigInteger->getValue());
     }
 }

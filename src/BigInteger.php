@@ -1,4 +1,11 @@
 <?php
+/**
+ * phpmath / biginteger (https://github.com/phpmath/biginteger)
+ *
+ * @link https://github.com/phpmath/biginteger for the canonical source repository
+ * @copyright Copyright (c) 2015-2017 phpmath (https://github.com/phpmath)
+ * @license https://github.com/phpmath/biginteger/blob/master/LICENSE.md MIT
+ */
 
 namespace PHP\Math\BigInteger;
 
@@ -103,7 +110,7 @@ class BigInteger
 
         $result = gmp_cmp($this->value, $value);
 
-        // It could happpen that gmp_cmp returns a value greater than one (e.g. gmp_cmp('123', '-123')). That's why
+        // It could happen that gmp_cmp returns a value greater than one (e.g. gmp_cmp('123', '-123')). That's why
         // we do an additional check to make sure to return the correct value.
 
         if ($result > 0) {

@@ -1,14 +1,28 @@
 {
     "name": "phpmath/biginteger",
+    "type": "library",
     "description": "A PHP library to work with big integers.",
-    "keywords": ["biginteger", "integer", "math"],
+    "keywords": [
+        "phpmath",
+        "biginteger",
+        "integer",
+        "math"
+    ],
+    "homepage": "https://github.com/phpmath/biginteger",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Walter Tamboer",
+            "homepage": "https://waltertamboer.nl",
+            "role": "Developer"
+        }
+    ],
     "require": {
-        "php": ">=5.3.3",
-        "ext-gmp": "*"
+        "php": "~7.0"
     },
     "require-dev": {
-		"phpunit/phpunit": "~4.5"
+        "phpunit/phpunit": "^5.6",
+        "squizlabs/php_codesniffer": "^2.7"
     },
     "autoload": {
         "psr-4": {
@@ -17,14 +31,22 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "PHP\\Math\\": "tests"
+            "PHP\\Math\\BigIntegerTest\\": "tests"
         }
     },
-    "authors": [
-        {
-            "name": "Walter Tamboer",
-            "homepage": "http://www.waltertamboer.nl",
-            "role": "Developer"
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "vendor/bin/phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
+        "fix-style": "vendor/bin/phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
         }
-    ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "process-timeout": 5000,
+        "sort-packages": true
+    }
 }

@@ -1,4 +1,11 @@
 <?php
+/**
+ * phpmath / biginteger (https://github.com/phpmath/biginteger)
+ *
+ * @link https://github.com/phpmath/biginteger for the canonical source repository
+ * @copyright Copyright (c) 2015-2017 phpmath (https://github.com/phpmath)
+ * @license https://github.com/phpmath/biginteger/blob/master/LICENSE.md MIT
+ */
 
 namespace PHP\Math\BigIntegerTest;
 

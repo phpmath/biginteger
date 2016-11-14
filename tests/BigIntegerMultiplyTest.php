@@ -1,50 +1,57 @@
 <?php
+/**
+ * phpmath / biginteger (https://github.com/phpmath/biginteger)
+ *
+ * @link https://github.com/phpmath/biginteger for the canonical source repository
+ * @copyright Copyright (c) 2015-2017 phpmath (https://github.com/phpmath)
+ * @license https://github.com/phpmath/biginteger/blob/master/LICENSE.md MIT
+ */
 
 namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
 use PHPUnit_Framework_TestCase;
 
-class BigIntegerModTest extends PHPUnit_Framework_TestCase
+class BigIntegerMultiplyTest extends PHPUnit_Framework_TestCase
 {
     public function testWithInteger()
     {
         // Arrange
-        $bigInteger = new BigInteger('456');
+        $bigInteger = new BigInteger('123');
 
         // Act
-        $bigInteger->mod(123);
+        $bigInteger->multiply(123);
 
         // Assert
         $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('87', $bigInteger->getValue());
+        $this->assertEquals('15129', $bigInteger->getValue());
     }
 
     public function testWithString()
     {
         // Arrange
-        $bigInteger = new BigInteger('456');
+        $bigInteger = new BigInteger('123');
 
         // Act
-        $bigInteger->mod('123');
+        $bigInteger->multiply('123');
 
         // Assert
         $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('87', $bigInteger->getValue());
+        $this->assertEquals('15129', $bigInteger->getValue());
     }
 
     public function testWithBigInteger()
     {
         // Arrange
-        $bigInteger = new BigInteger('456');
+        $bigInteger = new BigInteger('123');
         $bigIntegerValue = new BigInteger('123');
 
         // Act
-        $bigInteger->mod($bigIntegerValue);
+        $bigInteger->multiply($bigIntegerValue);
 
         // Assert
         $this->assertInternalType('string', $bigInteger->getValue());
-        $this->assertEquals('87', $bigInteger->getValue());
+        $this->assertEquals('15129', $bigInteger->getValue());
     }
 
     /**
@@ -56,7 +63,7 @@ class BigIntegerModTest extends PHPUnit_Framework_TestCase
         $bigInteger = new BigInteger('123');
 
         // Act
-        $bigInteger->mod('123.123');
+        $bigInteger->multiply('123.123');
 
         // Assert
         // ...
@@ -65,30 +72,30 @@ class BigIntegerModTest extends PHPUnit_Framework_TestCase
     public function testWithMutableFalse()
     {
         // Arrange
-        $bigInteger = new BigInteger('15', false);
+        $bigInteger = new BigInteger('2', false);
 
         // Act
-        $newBigInteger = $bigInteger->mod('7');
+        $newBigInteger = $bigInteger->multiply('2');
 
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertEquals('15', $bigInteger->getValue());
-        $this->assertEquals('1', $newBigInteger->getValue());
+        $this->assertEquals('2', $bigInteger->getValue());
+        $this->assertEquals('4', $newBigInteger->getValue());
     }
 
     public function testWithMutableTrue()
     {
         // Arrange
-        $bigInteger = new BigInteger('15', true);
+        $bigInteger = new BigInteger('2', true);
 
         // Act
-        $newBigInteger = $bigInteger->mod('7');
+        $newBigInteger = $bigInteger->multiply('2');
 
         // Assert
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $bigInteger);
         $this->assertInstanceOf('PHP\Math\BigInteger\BigInteger', $newBigInteger);
-        $this->assertEquals('1', $bigInteger->getValue());
-        $this->assertEquals('1', $newBigInteger->getValue());
+        $this->assertEquals('4', $bigInteger->getValue());
+        $this->assertEquals('4', $newBigInteger->getValue());
     }
 }
