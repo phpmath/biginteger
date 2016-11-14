@@ -6,7 +6,8 @@
         "phpmath",
         "biginteger",
         "integer",
-        "math"
+        "math",
+        "php7"
     ],
     "homepage": "https://github.com/phpmath/biginteger",
     "license": "MIT",
