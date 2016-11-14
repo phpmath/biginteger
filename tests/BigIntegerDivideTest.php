@@ -20,7 +20,7 @@ class BigIntegerDivideTest extends PHPUnit_Framework_TestCase
         $bigInteger = new BigInteger('123');
 
         // Act
-        $bigInteger->divide(123);
+        $bigInteger->divide('123');
 
         // Assert
         $this->assertInternalType('string', $bigInteger->getValue());
