@@ -7,7 +7,8 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-A PHP library to work with big integers.
+A PHP library to work with big integers. This library makes use of the GMP extension to
+do its calculations.
 
 ## Install
 
