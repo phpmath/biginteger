@@ -222,6 +222,18 @@ class BigInteger
     }
 
     /**
+     * Checks if the big integr is the prime number probably.
+     *
+     * @return bool
+     */
+    public function isPrimeNumber(): bool
+    {
+        $result = gmp_prob_prime($this->value);
+
+        return $result == 0 ? false:true;
+    }
+
+    /**
      * Checks if this object is mutable.
      *
      * @return bool
