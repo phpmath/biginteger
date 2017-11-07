@@ -7,26 +7,69 @@ use PHPUnit_Framework_TestCase;
 
 class BigIntegerPrimeNumberTest extends PHPUnit_Framework_TestCase
 {
-    public function testBigIntegerIsPrimeNumber()
+    public function testIsPrimeNumberWithouttPrimeNumber()
     {
-        // not prime number definitely
+        // Arrange
         $bigInteger = new BigInteger('6');
 
-        $notPrimeNumber = $bigInteger->isPrimeNumber();
-
-        // a prime number probably
-        $bigInteger = new BigInteger('1111111111111111111');
-
-        $isProbPrimeNumber = $bigInteger->isPrimeNumber();
-
-        // a prime number definitely
-        $bigInteger = new BigInteger('11');
-
-        $isPrimeNumber = $bigInteger->isPrimeNumber();
+        // Act
+        $withoutPrimeNumber = $bigInteger->isPrimeNumber();
 
         // Assert
-        $this->assertTrue($isProbPrimeNumber);
-        $this->assertTrue($isPrimeNumber);
-        $this->assertFalse($notPrimeNumber);
+        $this::assertFalse($withoutPrimeNumber);
+    }
+
+    public function testIsPrimeNumberWithPrimeNumber()
+    {
+        // Arrange
+        $bigInteger = new BigInteger('11');
+
+        // Act
+        $withPrimeNumber = $bigInteger->isPrimeNumber();
+
+        // Assert
+        $this::assertTrue($withPrimeNumber);
+    }
+
+    public function testIsPrimeNumberWithoutProbabilePrimeNumber()
+    {
+        // Arrange
+        $bigInteger = new BigInteger('1111111111111111111');
+
+        // Act
+        $probabilePrimeNumber = $bigInteger->isPrimeNumber();
+
+        // Assert
+        $this::assertTrue($probabilePrimeNumber);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testIsPrimeNumberProvidedProbabilityNumberIsLessThan5()
+    {
+        // Arrange
+        $bigInteger = new BigInteger('1111111111111111111');
+
+        // Act
+        $probabilePrimeNumber = $bigInteger->isPrimeNumber(-1.0);
+
+        // Assert
+        // ...
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testIsPrimeNumberProvidedProbabilityNumberIsGreaterThan10()
+    {
+        // Arrange
+        $bigInteger = new BigInteger('1111111111111111111');
+
+        // Act
+        $probabilePrimeNumber = $bigInteger->isPrimeNumber(2.0);
+
+        // Assert
+        // ...
     }
 }
