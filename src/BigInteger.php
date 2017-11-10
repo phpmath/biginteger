@@ -222,6 +222,23 @@ class BigInteger
     }
 
     /**
+     * Checks if the big integr is the prime number.
+     *
+     * @param float $probabilityFactor A normalized factor between 0 and 1 used for checking the probability.
+     * @return bool Returns true if the number is a prime number false if not.
+     */
+    public function isPrimeNumber(float $probabilityFactor = 1.0): bool
+    {
+        $reps = (int)floor(($probabilityFactor * 5.0) + 5.0);
+
+        if ($reps < 5 || $reps > 10) {
+            throw new InvalidArgumentException('The provided probability number should be 5 to 10.');
+        }
+
+        return gmp_prob_prime($this->value, $reps) !== 0;
+    }
+
+    /**
      * Checks if this object is mutable.
      *
      * @return bool
