@@ -21,7 +21,8 @@ $ composer require phpmath/biginteger
 ## Usage
 
 ``` php
-$number = new PHP\Math\BigInteger('8273467836243255543265432745');
+use PHP\Math\BigInteger\BigInteger;
+$number = new BigInteger('8273467836243255543265432745');
 ```
 ## Features
 
