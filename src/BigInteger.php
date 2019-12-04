@@ -265,7 +265,7 @@ class BigInteger
      */
     public function __toString(): string
     {
-        return $this->toString();
+        return $this->getValue();
     }
 
     /**
