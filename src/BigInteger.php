@@ -300,7 +300,7 @@ class BigInteger
 
     /**
      * Returns a copy of the current number.
-     * 
+     *
      * @return BigInteger
      */
     public function copy(): BigInteger
