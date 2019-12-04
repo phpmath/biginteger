@@ -3,9 +3,9 @@
 namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BigIntegerAbsTest extends PHPUnit_Framework_TestCase
+class BigIntegerAbsTest extends TestCase
 {
     public function testWithNegativeNumber()
     {

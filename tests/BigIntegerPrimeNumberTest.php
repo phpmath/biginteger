@@ -3,9 +3,9 @@
 namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BigIntegerPrimeNumberTest extends PHPUnit_Framework_TestCase
+class BigIntegerPrimeNumberTest extends TestCase
 {
     public function testIsPrimeNumberWithouttPrimeNumber()
     {

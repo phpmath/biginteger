@@ -10,9 +10,9 @@
 namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BigIntegerFactorialTest extends PHPUnit_Framework_TestCase
+class BigIntegerFactorialTest extends TestCase
 {
     public function testFactorial()
     {

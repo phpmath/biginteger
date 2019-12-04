@@ -3,9 +3,9 @@
 namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BigIntegerAddTest extends PHPUnit_Framework_TestCase
+class BigIntegerAddTest extends TestCase
 {
     public function testWithInteger()
     {

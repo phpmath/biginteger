@@ -10,9 +10,9 @@
 namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BigIntegerDivideTest extends PHPUnit_Framework_TestCase
+class BigIntegerDivideTest extends TestCase
 {
     public function testWithInteger()
     {
