@@ -297,4 +297,14 @@ class BigInteger
 
         return $result;
     }
+
+    /**
+     * Returns a copy of the current number.
+     * 
+     * @return BigInteger
+     */
+    public function copy(): BigInteger
+    {
+        return clone $this;
+    }
 }
