@@ -274,7 +274,7 @@ class BigInteger
      * @param GMP $value The value to assign.
      * @return BigInteger
      */
-    private function assignValue(GMP $value): BigInteger
+    protected function assignValue(GMP $value): BigInteger
     {
         $rawValue = gmp_strval($value);
 
@@ -294,7 +294,7 @@ class BigInteger
      * @return GMP
      * @throws InvalidArgumentException Thrown when the value is invalid.
      */
-    private function initValue(string $value): GMP
+    protected function initValue(string $value): GMP
     {
         $result = @gmp_init($value);
 
