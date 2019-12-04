@@ -114,14 +114,7 @@ class BigInteger
 
         // It could happen that gmp_cmp returns a value greater than one (e.g. gmp_cmp('123', '-123')). That's why
         // we do an additional check to make sure to return the correct value.
-
-        if ($result > 0) {
-            return 1;
-        } elseif ($result < 0) {
-            return -1;
-        }
-
-        return 0;
+        return $result <=> 0;
     }
 
     /**
@@ -265,7 +258,7 @@ class BigInteger
      */
     public function __toString(): string
     {
-        return $this->toString();
+        return $this->getValue();
     }
 
     /**
@@ -274,7 +267,7 @@ class BigInteger
      * @param GMP $value The value to assign.
      * @return BigInteger
      */
-    private function assignValue(GMP $value): BigInteger
+    protected function assignValue(GMP $value): BigInteger
     {
         $rawValue = gmp_strval($value);
 
@@ -294,7 +287,7 @@ class BigInteger
      * @return GMP
      * @throws InvalidArgumentException Thrown when the value is invalid.
      */
-    private function initValue(string $value): GMP
+    protected function initValue(string $value): GMP
     {
         $result = @gmp_init($value);
 
@@ -303,5 +296,15 @@ class BigInteger
         }
 
         return $result;
+    }
+
+    /**
+     * Returns a copy of the current number.
+     * 
+     * @return BigInteger
+     */
+    public function copy(): BigInteger
+    {
+        return clone $this;
     }
 }

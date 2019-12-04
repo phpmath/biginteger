@@ -10,9 +10,9 @@
 namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BigIntegerPowTest extends PHPUnit_Framework_TestCase
+class BigIntegerPowTest extends TestCase
 {
     public function testWithInteger()
     {
@@ -23,7 +23,7 @@ class BigIntegerPowTest extends PHPUnit_Framework_TestCase
         $bigInteger->pow(20);
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('628206215175202159781085149496179361969201', $bigInteger->getValue());
     }
 

@@ -2,10 +2,11 @@
 
 namespace PHP\Math\BigIntegerTest;
 
+use InvalidArgumentException;
 use PHP\Math\BigInteger\BigInteger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BigIntegerPrimeNumberTest extends PHPUnit_Framework_TestCase
+class BigIntegerPrimeNumberTest extends TestCase
 {
     public function testIsPrimeNumberWithouttPrimeNumber()
     {
@@ -43,11 +44,10 @@ class BigIntegerPrimeNumberTest extends PHPUnit_Framework_TestCase
         $this::assertTrue($probabilePrimeNumber);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testIsPrimeNumberProvidedProbabilityNumberIsLessThan5()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         // Arrange
         $bigInteger = new BigInteger('1111111111111111111');
 
@@ -58,11 +58,10 @@ class BigIntegerPrimeNumberTest extends PHPUnit_Framework_TestCase
         // ...
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testIsPrimeNumberProvidedProbabilityNumberIsGreaterThan10()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         // Arrange
         $bigInteger = new BigInteger('1111111111111111111');
 

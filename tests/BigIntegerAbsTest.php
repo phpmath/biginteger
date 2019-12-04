@@ -3,9 +3,9 @@
 namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BigIntegerAbsTest extends PHPUnit_Framework_TestCase
+class BigIntegerAbsTest extends TestCase
 {
     public function testWithNegativeNumber()
     {
@@ -16,7 +16,7 @@ class BigIntegerAbsTest extends PHPUnit_Framework_TestCase
         $bigInteger->abs();
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('123', $bigInteger->getValue());
     }
 
@@ -29,7 +29,7 @@ class BigIntegerAbsTest extends PHPUnit_Framework_TestCase
         $bigInteger->abs();
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('123', $bigInteger->getValue());
     }
 
@@ -42,7 +42,7 @@ class BigIntegerAbsTest extends PHPUnit_Framework_TestCase
         $bigInteger->abs();
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('0', $bigInteger->getValue());
     }
 

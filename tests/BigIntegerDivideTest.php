@@ -9,10 +9,11 @@
 
 namespace PHP\Math\BigIntegerTest;
 
+use InvalidArgumentException;
 use PHP\Math\BigInteger\BigInteger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BigIntegerDivideTest extends PHPUnit_Framework_TestCase
+class BigIntegerDivideTest extends TestCase
 {
     public function testWithInteger()
     {
@@ -23,7 +24,7 @@ class BigIntegerDivideTest extends PHPUnit_Framework_TestCase
         $bigInteger->divide('123');
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('1', $bigInteger->getValue());
     }
 
@@ -36,7 +37,7 @@ class BigIntegerDivideTest extends PHPUnit_Framework_TestCase
         $bigInteger->divide('123');
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('1', $bigInteger->getValue());
     }
 
@@ -50,7 +51,7 @@ class BigIntegerDivideTest extends PHPUnit_Framework_TestCase
         $bigInteger->divide($bigIntegerValue);
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('1', $bigInteger->getValue());
     }
 
@@ -64,7 +65,7 @@ class BigIntegerDivideTest extends PHPUnit_Framework_TestCase
         $bigInteger->divide($bigIntegerValue);
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('-1', $bigInteger->getValue());
     }
 
@@ -78,7 +79,7 @@ class BigIntegerDivideTest extends PHPUnit_Framework_TestCase
         $bigInteger->divide($bigIntegerValue);
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('1', $bigInteger->getValue());
     }
 
@@ -92,15 +93,14 @@ class BigIntegerDivideTest extends PHPUnit_Framework_TestCase
         $bigInteger->divide($bigIntegerValue);
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('1', $bigInteger->getValue());
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testWithInvalidValue()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         // Arrange
         $bigInteger = new BigInteger('123');
 

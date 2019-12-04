@@ -10,9 +10,9 @@
 namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BigIntegerFactorialTest extends PHPUnit_Framework_TestCase
+class BigIntegerFactorialTest extends TestCase
 {
     public function testFactorial()
     {
@@ -23,7 +23,7 @@ class BigIntegerFactorialTest extends PHPUnit_Framework_TestCase
         $bigIntegerValue = $bigInteger->factorial();
 
         // Assert
-        $this->assertInternalType('string', $bigIntegerValue->getValue());
+        $this->assertIsString($bigIntegerValue->getValue());
         $this->assertEquals('120', $bigIntegerValue->getValue());
     }
 

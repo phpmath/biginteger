@@ -10,9 +10,9 @@
 namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BigIntegerNegateTest extends PHPUnit_Framework_TestCase
+class BigIntegerNegateTest extends TestCase
 {
     public function testNegate()
     {
@@ -23,7 +23,7 @@ class BigIntegerNegateTest extends PHPUnit_Framework_TestCase
         $bigInteger->negate();
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('-123', $bigInteger->getValue());
     }
 
