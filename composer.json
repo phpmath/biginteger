@@ -16,6 +16,11 @@
             "name": "Walter Tamboer",
             "homepage": "https://waltertamboer.nl",
             "role": "Developer"
+        },
+        {
+            "name": "Mohammad Amin Chitgarha",
+            "email": "machitgarha@outlook.com",
+            "role": "Contributer"
         }
     ],
     "require": {
