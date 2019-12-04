@@ -16,7 +16,7 @@ class BigIntegerAbsTest extends TestCase
         $bigInteger->abs();
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('123', $bigInteger->getValue());
     }
 
@@ -29,7 +29,7 @@ class BigIntegerAbsTest extends TestCase
         $bigInteger->abs();
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('123', $bigInteger->getValue());
     }
 
@@ -42,7 +42,7 @@ class BigIntegerAbsTest extends TestCase
         $bigInteger->abs();
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('0', $bigInteger->getValue());
     }
 

@@ -23,7 +23,7 @@ class BigIntegerFactorialTest extends TestCase
         $bigIntegerValue = $bigInteger->factorial();
 
         // Assert
-        $this->assertInternalType('string', $bigIntegerValue->getValue());
+        $this->assertIsString($bigIntegerValue->getValue());
         $this->assertEquals('120', $bigIntegerValue->getValue());
     }
 

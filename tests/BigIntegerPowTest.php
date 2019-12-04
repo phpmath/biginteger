@@ -23,7 +23,7 @@ class BigIntegerPowTest extends TestCase
         $bigInteger->pow(20);
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('628206215175202159781085149496179361969201', $bigInteger->getValue());
     }
 

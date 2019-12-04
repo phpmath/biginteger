@@ -23,7 +23,7 @@ class BigIntegerNegateTest extends TestCase
         $bigInteger->negate();
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('-123', $bigInteger->getValue());
     }
 

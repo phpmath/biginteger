@@ -11,6 +11,7 @@ namespace PHP\Math\BigIntegerTest;
 
 use PHP\Math\BigInteger\BigInteger;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class BigIntegerSetValueTest extends TestCase
 {
@@ -23,7 +24,7 @@ class BigIntegerSetValueTest extends TestCase
         $bigInteger->setValue(123);
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('123', $bigInteger->getValue());
     }
 
@@ -36,7 +37,7 @@ class BigIntegerSetValueTest extends TestCase
         $bigInteger->setValue('123');
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('123', $bigInteger->getValue());
     }
 
@@ -50,15 +51,14 @@ class BigIntegerSetValueTest extends TestCase
         $bigInteger->setValue($bigIntegerValue);
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('123', $bigInteger->getValue());
     }
 
-    /**
-     * @expectedException RuntimeException
-     */
     public function testWithMutableFalse()
     {
+        $this->expectException(RuntimeException::class);
+
         // Arrange
         $bigInteger = new BigInteger('0', false);
 

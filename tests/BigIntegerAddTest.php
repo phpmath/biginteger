@@ -2,6 +2,7 @@
 
 namespace PHP\Math\BigIntegerTest;
 
+use InvalidArgumentException;
 use PHP\Math\BigInteger\BigInteger;
 use PHPUnit\Framework\TestCase;
 
@@ -16,7 +17,7 @@ class BigIntegerAddTest extends TestCase
         $bigInteger->add(123);
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('246', $bigInteger->getValue());
     }
 
@@ -29,7 +30,7 @@ class BigIntegerAddTest extends TestCase
         $bigInteger->add('123');
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('246', $bigInteger->getValue());
     }
 
@@ -43,15 +44,14 @@ class BigIntegerAddTest extends TestCase
         $bigInteger->add($bigIntegerValue);
 
         // Assert
-        $this->assertInternalType('string', $bigInteger->getValue());
+        $this->assertIsString($bigInteger->getValue());
         $this->assertEquals('246', $bigInteger->getValue());
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testWithInvalidValue()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         // Arrange
         $bigInteger = new BigInteger('123');
 

@@ -2,6 +2,7 @@
 
 namespace PHP\Math\BigIntegerTest;
 
+use InvalidArgumentException;
 use PHP\Math\BigInteger\BigInteger;
 use PHPUnit\Framework\TestCase;
 
@@ -16,7 +17,7 @@ class BigIntegerCmpTest extends TestCase
         $result = $bigInteger->cmp('-123');
 
         // Assert
-        $this->assertInternalType('int', $result);
+        $this->assertIsInt($result);
         $this->assertEquals(1, $result);
     }
 
@@ -29,7 +30,7 @@ class BigIntegerCmpTest extends TestCase
         $result = $bigInteger->cmp('246');
 
         // Assert
-        $this->assertInternalType('int', $result);
+        $this->assertIsInt($result);
         $this->assertEquals(-1, $result);
     }
 
@@ -42,15 +43,14 @@ class BigIntegerCmpTest extends TestCase
         $result = $bigInteger->cmp('123');
 
         // Assert
-        $this->assertInternalType('int', $result);
+        $this->assertIsInt($result);
         $this->assertEquals(0, $result);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testWithInvalidValue()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         // Arrange
         $bigInteger = new BigInteger('123');
 
