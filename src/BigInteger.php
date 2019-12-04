@@ -114,14 +114,7 @@ class BigInteger
 
         // It could happen that gmp_cmp returns a value greater than one (e.g. gmp_cmp('123', '-123')). That's why
         // we do an additional check to make sure to return the correct value.
-
-        if ($result > 0) {
-            return 1;
-        } elseif ($result < 0) {
-            return -1;
-        }
-
-        return 0;
+        return $result <=> 0;
     }
 
     /**
