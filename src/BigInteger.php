@@ -3,223 +3,245 @@
  * phpmath / biginteger (https://github.com/phpmath/biginteger)
  *
  * @link https://github.com/phpmath/biginteger for the canonical source repository
- * @copyright Copyright (c) 2015-2017 phpmath (https://github.com/phpmath)
- * @license https://github.com/phpmath/biginteger/blob/master/LICENSE.md MIT
  */
 
 declare(strict_types=1);
 
 namespace PHP\Math\BigInteger;
 
-use GMP;
-use InvalidArgumentException;
-use RuntimeException;
+use PHP\Math\BigInteger\Exception\InvalidValueException;
 
 /**
- * A big integer value.
+ * Represents an arbitrary-precision integer and provides operations for mathematical calculations
+ * such as addition, subtraction, multiplication, division, comparison, and more.
+ *
+ * This abstraction ensures consistent handling of big integers across different implementations.
  */
-class BigInteger
+interface BigInteger
 {
     /**
-     * The value represented as a string.
+     * Returns the absolute value of this number.
      *
-     * @var string
+     * @return static A BigInteger instance representing the result.
      */
-    private $value;
+    public function abs(): static;
 
     /**
-     * A flag that indicates whether or not the state of this object can be changed.
+     * Adds the given value to this number.
      *
-     * @var bool
+     * @param BigInteger $value The number to add.
+     *
+     * @return static A BigInteger instance representing the result.
      */
-    private $mutable;
+    public function add(BigInteger $value): static;
 
     /**
-     * Initializes a new instance of this class.
+     * Calculates the binomial coefficient C(n, k), also known as "n choose k".
      *
-     * @param string $value The value to set.
-     * @param bool $mutable Whether or not the state of this object can be changed.
+     * The binomial coefficient represents the number of ways to choose {@see $k}
+     * elements from a set of {@see $this} elements without regard to the order
+     * of selection.
+     *
+     * @param int $k The number of elements to choose.
+     * @return static A BigInteger instance representing the binomial coefficient.
+     *
+     * @throws InvalidValueException If $k is negative or greater than the current value of this BigInteger.
      */
-    public function __construct(string $value = '0', bool $mutable = true)
-    {
-        $this->value = $this->initValue($value);
-        $this->mutable = $mutable;
-    }
+    public function binomial(int $k): static;
 
     /**
-     * Gets the value of the big integer.
+     * Performs a bitwise AND operation between this big integer and the given value.
      *
-     * @return string
+     * @param BigInteger $value The value to AND with.
+     * @return static A BigInteger instance representing the result.
      */
-    public function getValue(): string
-    {
-        return gmp_strval($this->value);
-    }
+    public function bitwiseAnd(BigInteger $value): static;
 
     /**
-     * Sets the value.
+     * Performs a bitwise NOT (one's complement) operation on this big integer.
      *
-     * @param string $value The value to set.
-     * @return BigInteger
+     * Each bit in the binary representation is inverted:
+     * 1 becomes 0, and 0 becomes 1.
+     *
+     * @return static A new BigInteger instance representing the result.
      */
-    public function setValue(string $value): BigInteger
-    {
-        if (!$this->isMutable()) {
-            throw new RuntimeException('Cannot set the value since the number is immutable.');
-        }
-
-        $this->value = $this->initValue($value);
-
-        return $this;
-    }
+    public function bitwiseNot(): static;
 
     /**
-     * Converts the value to an absolute number.
+     * Performs a bitwise OR operation between this big integer and the given value.
      *
-     * @return BigInteger
+     * @param BigInteger $value The value to OR with.
+     * @return static A BigInteger instance representing the result.
      */
-    public function abs(): BigInteger
-    {
-        $value = gmp_abs($this->value);
-
-        return $this->assignValue($value);
-    }
+    public function bitwiseOr(BigInteger $value): static;
 
     /**
-     * Adds the given value to this value.
+     * Performs a bitwise XOR (exclusive OR) operation between this big integer and the given value.
      *
-     * @param string $value The value to add.
-     * @return BigInteger
+     * @param BigInteger $value The value to XOR with.
+     * @return static A BigInteger instance representing the result.
      */
-    public function add(string $value): BigInteger
-    {
-        $gmp = $this->initValue($value);
-
-        $calculatedValue = gmp_add($this->value, $gmp);
-
-        return $this->assignValue($calculatedValue);
-    }
+    public function bitwiseXor(BigInteger $value): static;
 
     /**
-     * Compares this number and the given number.
+     * Performs a probabilistic primality check on this number.
      *
-     * @param string $value The value to compare.
-     * @return int Returns -1 is the number is less than this number. 0 if equal and 1 when greater.
+     * The result indicates whether the number is composite, likely prime,
+     * or definitely prime within the bounds of the test.
+     *
+     * @return ProbablePrime The result of the primality check.
      */
-    public function cmp($value): int
-    {
-        $value = $this->initValue($value);
-
-        $result = gmp_cmp($this->value, $value);
-
-        // It could happen that gmp_cmp returns a value greater than one (e.g. gmp_cmp('123', '-123')). That's why
-        // we do an additional check to make sure to return the correct value.
-
-        if ($result > 0) {
-            return 1;
-        } elseif ($result < 0) {
-            return -1;
-        }
-
-        return 0;
-    }
+    public function checkPrimeProbability(): ProbablePrime;
 
     /**
-     * Divides this value by the given value.
+     * Compares this number with another value.
+     * If you want to know if the numbers are equal, use {@see equals()} instead.
      *
-     * @param string $value The value to divide by.
-     * @return BigInteger
+     * @param BigInteger $value The number to compare against.
+     *
+     * @return int Returns -1 if this number is smaller, 0 if equal, and 1 if larger.
      */
-    public function divide(string $value): BigInteger
-    {
-        $gmp = $this->initValue($value);
-
-        $calculatedValue = gmp_div_q($this->value, $gmp, GMP_ROUND_ZERO);
-
-        return $this->assignValue($calculatedValue);
-    }
+    public function cmp(BigInteger $value): int;
 
     /**
-     * Calculates factorial of this value.
+     * Divides this number by the given value (integer division).
      *
-     * @return BigInteger
+     * @param BigInteger $value The number to divide by.
+     *
+     * @return static A BigInteger instance representing the result.
      */
-    public function factorial(): BigInteger
-    {
-        $calculatedValue = gmp_fact($this->getValue());
-
-        return $this->assignValue($calculatedValue);
-    }
+    public function divide(BigInteger $value): static;
 
     /**
-     * Performs a modulo operation with the given number.
+     * Divides this big integer by the given value and returns the remainder.
      *
-     * @param string $value The value to perform a modulo operation with.
-     * @return BigInteger
+     * This operation is equivalent to the modulo operation:
+     *   r = a mod b
+     * where r is the remainder after dividing this number (a) by $value (b).
+     * The difference with the modulo operation is that this returns the truncated remainder after dividing.
+     *
+     * @param BigInteger $value The divisor.
+     * @return static A new BigInteger instance representing the remainder.
+     *
+     * @throws InvalidValueException If $value is zero.
      */
-    public function mod(string $value): BigInteger
-    {
-        $gmp = $this->initValue($value);
-
-        $calculatedValue = gmp_mod($this->value, $gmp);
-
-        return $this->assignValue($calculatedValue);
-    }
+    public function divideRemainder(BigInteger $value): static;
 
     /**
-     * Multiplies the given value with this value.
+     * Checks if this number is equal to another value.
      *
-     * @param string $value The value to multiply with.
-     * @return BigInteger
+     * @param BigInteger $value The number to compare against.
+     *
+     * @return bool True if equal, false otherwise.
      */
-    public function multiply(string $value): BigInteger
-    {
-        $gmp = $this->initValue($value);
-
-        $calculatedValue = gmp_mul($this->value, $gmp);
-
-        return $this->assignValue($calculatedValue);
-    }
+    public function equals(BigInteger $value): bool;
 
     /**
-     * Negates the value.
+     * Calculates the factorial of this number.
      *
-     * @return BigInteger
+     * @return static A BigInteger instance representing the result.
      */
-    public function negate(): BigInteger
-    {
-        $calculatedValue = gmp_neg($this->value);
-
-        return $this->assignValue($calculatedValue);
-    }
+    public function factorial(): static;
+    /**
+     * Computes the greatest common divisor (GCD) of this number and the given value.
+     *
+     * @param BigInteger $value The value to compute the GCD with.
+     * @return static A new BigInteger instance representing the GCD.
+     */
+    public function greatestCommonDivisor(BigInteger $value): static;
 
     /**
-     * Performs a power operation with the given number.
+     * Computes the Hamming distance between this number and the given value.
      *
-     * @param int $value The value to perform a power operation with.
-     * @return BigInteger
+     * The Hamming distance is the number of differing bits in the binary representation.
+     *
+     * @param BigInteger $value The value to compare with.
+     * @return int The number of differing bits.
      */
-    public function pow(int $value): BigInteger
-    {
-        $calculatedValue = gmp_pow($this->value, $value);
-
-        return $this->assignValue($calculatedValue);
-    }
+    public function hammingDistance(BigInteger $value): int;
 
     /**
-     * Subtracts the given value from this value.
+     * Computes the modular multiplicative inverse of this number modulo the given value.
      *
-     * @param string $value The value to subtract.
-     * @return BigInteger
+     * The result `x` satisfies: (this * x) ≡ 1 (mod $value).
+     *
+     * @param BigInteger $value The modulus.
+     * @return static A new BigInteger instance representing the modular inverse.
+     *
+     * @throws InvalidValueException If no inverse exists.
      */
-    public function subtract(string $value): BigInteger
-    {
-        $gmp = $this->initValue($value);
+    public function invert(BigInteger $value): static;
 
-        $calculatedValue = gmp_sub($this->value, $gmp);
+    /**
+     * Returns whether this number is less than zero.
+     *
+     * @return bool Returns true if this number is less than zero, false otherwise.
+     */
+    public function isNegative(): bool;
 
-        return $this->assignValue($calculatedValue);
-    }
+    /**
+     * Checks whether this number is a perfect power.
+     *
+     * A perfect power is a number of the form a^b where a > 1 and b > 1.
+     *
+     * @return bool True if the number is a perfect power, false otherwise.
+     */
+    public function isPerfectPower(): bool;
+
+    /**
+     * Checks whether this number is a perfect square.
+     *
+     * A perfect square is a number of the form n^2.
+     *
+     * @return bool True if the number is a perfect square, false otherwise.
+     */
+    public function isPerfectSquare(): bool;
+
+    /**
+     * Returns whether this number is greater than zero.
+     *
+     * @return bool Returns true if this number is greater than zero, false otherwise.
+     */
+    public function isPositive(): bool;
+
+    /**
+     * Returns whether this number is zero.
+     *
+     * @return bool Returns true if this number is zero, false otherwise.
+     */
+    public function isZero(): bool;
+
+    /**
+     * Computes the Jacobi symbol (a/n).
+     *
+     * @param BigInteger $value The denominator n (must be odd and positive).
+     * @return int Returns -1, 0, or 1 depending on the Jacobi symbol.
+     */
+    public function jacobi(BigInteger $value): int;
+
+    /**
+     * Computes the Kronecker symbol (a/n), a generalization of the Jacobi symbol.
+     *
+     * @param BigInteger $value The denominator n.
+     * @return int Returns -1, 0, or 1 depending on the Kronecker symbol.
+     */
+    public function kronecker(BigInteger $value): int;
+
+    /**
+     * Computes the least common multiple (LCM) of this number and the given value.
+     *
+     * @param BigInteger $value The value to compute the LCM with.
+     * @return static A new BigInteger instance representing the LCM.
+     */
+    public function leastCommonMultiple(BigInteger $value): static;
+
+    /**
+     * Computes the Legendre symbol (a/p).
+     *
+     * @param BigInteger $value The odd prime p.
+     * @return int Returns -1, 0, or 1 depending on the Legendre symbol.
+     */
+    public function legendre(BigInteger $value): int;
 
     /**
      * Checks if the big integr is the prime number.
@@ -239,69 +261,84 @@ class BigInteger
     }
 
     /**
-     * Checks if this object is mutable.
+     * Multiplies this number by the given value.
      *
-     * @return bool
+     * @param BigInteger $value The number to multiply by.
+     *
+     * @return static A BigInteger instance representing the result.
      */
-    public function isMutable(): bool
-    {
-        return $this->mutable;
-    }
+    public function multiply(BigInteger $value): static;
 
     /**
-     * Converts this class to a string.
+     * Performs a modulo operation with the given value.
      *
-     * @return string
+     * @param BigInteger $value The modulus.
+     *
+     * @return static A BigInteger instance representing the result.
      */
-    public function toString(): string
-    {
-        return $this->getValue();
-    }
+    public function mod(BigInteger $value): static;
 
     /**
-     * Converts this class to a string.
+     * Negates this number.
      *
-     * @return string
+     * @return static A BigInteger instance representing the result.
      */
-    public function __toString(): string
-    {
-        return $this->toString();
-    }
+    public function negate(): static;
 
     /**
-     * A helper method to assign the given value.
+     * Finds the next prime greater than this number.
      *
-     * @param GMP $value The value to assign.
-     * @return BigInteger
+     * @return static A new BigInteger instance representing the next prime number.
      */
-    private function assignValue(GMP $value): BigInteger
-    {
-        $rawValue = gmp_strval($value);
-
-        if ($this->isMutable()) {
-            $this->value = gmp_init($rawValue);
-
-            return $this;
-        }
-
-        return new BigInteger($rawValue, false);
-    }
+    public function nextPrime(): static;
 
     /**
-     * Creates a new GMP object.
+     * Raises this number to the power of the given exponent.
      *
-     * @param string $value The value to initialize with.
-     * @return GMP
-     * @throws InvalidArgumentException Thrown when the value is invalid.
+     * @param int $exponent The exponent.
+     *
+     * @return static A BigInteger instance representing the result.
      */
-    private function initValue(string $value): GMP
-    {
-        $result = @gmp_init($value);
+    public function pow(int $exponent): static;
 
-        if ($result === false) {
-            throw new InvalidArgumentException('The provided number is invalid.');
-        }
+    /**
+     * Computes the integer n-th root of this number.
+     *
+     * @param int $nth The degree of the root (must be >= 2).
+     * @return static A new BigInteger instance representing the n-th root.
+     *
+     * @throws InvalidValueException If $nth < 2.
+     */
+    public function root(int $nth): static;
 
-        return $result;
-    }
+    /**
+     * Determines the sign of this number.
+     *
+     * @return Sign Returns the sign of this number:
+     *   - Sign::NEGATIVE if this number is negative
+     *   - Sign::POSITIVE if this number is positive
+     *   - Sign::ZERO if this number is zero
+     */
+    public function sign(): Sign;
+
+    /**
+     * Returns the integer square root of this BigInteger.
+     *
+     * @return static A new instance representing the square root.
+     */
+    public function sqrt(): static;
+
+    /**
+     * Subtracts the given value from this number.
+     *
+     * @param BigInteger $value The number to subtract.
+     *
+     * @return static A BigInteger instance representing the result.
+     */
+    public function subtract(BigInteger $value): static;
+
+    /**
+     * Returns the value of the big integer as a string.
+     */
+    public function value(): string;
 }

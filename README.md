@@ -1,10 +1,7 @@
 # biginteger
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
+[![Software License][ico-license]](LICENSE)
 [![Total Downloads][ico-downloads]][link-downloads]
 
 A PHP library to work with big integers. This library makes use of the GMP extension to
@@ -20,28 +17,54 @@ $ composer require phpmath/biginteger
 
 ## Usage
 
+There are two ways to create a BigInteger. A mutable or immutable BigInteger.
+
 ``` php
-use PHP\Math\BigInteger\BigInteger;
-$number = new BigInteger('8273467836243255543265432745');
+$number = new PHP\Math\BigInteger\MutableBigInteger('8273467836243255543265432745');
+$number = new PHP\Math\BigInteger\ImmutableBigInteger('8273467836243255543265432745');
 ```
+
+```php
+$a = new PHP\Math\BigInteger\ImmutableBigInteger('12345678901234567890');
+$b = new PHP\Math\BigInteger\ImmutableBigInteger('98765432109876543210');
+
+$sum = $a->add($b);
+
+echo $sum->value();
+```
+
 ## Features
 
-This library supports the following operations:
+This library provides a wide range of operations for working with big integers using the GMP extension:
 
-* Basic operations such as add, divide, multiply and subtract.
-* Performing modulo operations.
-* Calculate the square root and power of values.
-* Negate numbers
-* Make numbers absolute.
-* Compare numbers
+### Basic Arithmetic
+- Add, subtract, multiply, and divide large numbers.
+- Calculate powers and roots of numbers.
+- Perform modulo operations.
+- Negate numbers and get absolute values.
 
-Beside these operations it's also possible to make the object mutable or immutable. Performing operations on an
-immutable number results in the function returning a new instance.
+### Comparison
+- Compare numbers using `cmp()` and check equality with `equals()`.
+- Determine the sign of a number (positive, negative, or zero).
+
+### Bitwise Operations
+- Perform bitwise AND, OR, XOR, and NOT operations.
+- Compute Hamming distance between numbers.
+
+### Number Theory
+- Calculate factorials.
+- Check if numbers are prime or likely prime.
+- Compute modular inverses.
+- Compute Jacobi, Legendre, and Kronecker symbols.
+- Calculate greatest common divisors (GCD) and least common multiples (LCM).
+- Check for perfect squares and perfect powers.
+- Find the next prime number.
+- Compute binomial coefficients.
 
 
 ## Change log
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+We keep a changelog for every release, have a look at the [releases overview][link-releases-overview].
 
 ## Testing
 
@@ -49,9 +72,15 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 $ composer test
 ```
 
+To generate code coverage:
+
+``` bash
+$ composer test-coverage
+```
+
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
+All contributions are welcome. Feel free to create a PR or open an issue.
 
 ## Security
 
@@ -64,19 +93,14 @@ If you discover any security related issues, please create an issue in the issue
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/phpmath/biginteger.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/phpmath/biginteger/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpmath/biginteger.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpmath/biginteger.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/phpmath/biginteger.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/phpmath/biginteger
-[link-travis]: https://travis-ci.org/phpmath/biginteger
-[link-scrutinizer]: https://scrutinizer-ci.com/g/phpmath/biginteger/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/phpmath/biginteger
-[link-downloads]: https://packagist.org/packages/phpmath/biginteger
+[link-downloads]: https://packagist.org/packages/phpmath/biginteger/stats
 [link-author]: https://github.com/waltertamboer
 [link-contributors]: ../../contributors
+[link-releases-overview]: https://github.com/phpmath/biginteger/releases
