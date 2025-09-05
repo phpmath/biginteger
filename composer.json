@@ -24,7 +24,7 @@
     },
     "require-dev": {
         "phpmath/coding-standard": "^1.0",
-        "phpunit/phpunit": "^12.3"
+        "phpunit/phpunit": "^11.5"
     },
     "autoload": {
         "psr-4": {
@@ -51,6 +51,9 @@
         "sort-packages": true,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "platform": {
+            "php": "8.2.0"
         }
     }
 }
