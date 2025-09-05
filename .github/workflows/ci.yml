@@ -23,10 +23,10 @@ jobs:
           extensions: gmp, mbstring
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --prefer-dist --optimize-autoloader
+        run: composer install
 
       - name: Run PHPCS
-        run: vendor/bin/phpcs --standard=PSR12 src tests
+        run: vendor/bin/phpcs
 
       - name: Run PHPUnit with coverage
         run: |
