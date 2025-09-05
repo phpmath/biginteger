@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace ImmutableBigInteger;
+namespace PHP\Math\BigInteger\Tests\ImmutableBigInteger;
 
 use PHP\Math\BigInteger\ImmutableBigInteger;
 use PHPUnit\Framework\Attributes\CoversMethod;
