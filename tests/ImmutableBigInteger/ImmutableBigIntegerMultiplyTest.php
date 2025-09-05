@@ -108,7 +108,10 @@ final class ImmutableBigIntegerMultiplyTest extends TestCase
         $result = $bigint1->multiply($bigint2);
 
         // Assert
-        static::assertStringContainsString('121932631137021795226185032733622923332237463801111263526900', $result->value());
+        static::assertStringContainsString(
+            '121932631137021795226185032733622923332237463801111263526900',
+            $result->value(),
+        );
     }
 
     public function testMultiplyIsCommutative(): void

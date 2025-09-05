@@ -11,21 +11,41 @@ namespace PHP\Math\BigInteger;
 
 use GMP;
 use PHP\Math\BigInteger\Exception\InvalidValueException;
-
 use ValueError;
 
+use function floor;
 use function gmp_abs;
 use function gmp_add;
+use function gmp_and;
+use function gmp_binomial;
 use function gmp_cmp;
+use function gmp_com;
 use function gmp_div_q;
+use function gmp_div_r;
 use function gmp_fact;
+use function gmp_gcd;
+use function gmp_hamdist;
 use function gmp_init;
+use function gmp_invert;
+use function gmp_jacobi;
+use function gmp_kronecker;
+use function gmp_lcm;
+use function gmp_legendre;
 use function gmp_mod;
 use function gmp_mul;
 use function gmp_neg;
+use function gmp_nextprime;
+use function gmp_or;
+use function gmp_perfect_power;
+use function gmp_perfect_square;
 use function gmp_pow;
+use function gmp_prob_prime;
+use function gmp_root;
+use function gmp_sign;
+use function gmp_sqrt;
 use function gmp_strval;
 use function gmp_sub;
+use function gmp_xor;
 
 use const GMP_ROUND_ZERO;
 
@@ -191,6 +211,17 @@ final class MutableBigInteger implements BigInteger
     public function isPositive(): bool
     {
         return gmp_cmp($this->handle, 0) > 0;
+    }
+
+    public function isPrimeNumber(float $probabilityFactor = 1.0): bool
+    {
+        $reps = (int)floor(($probabilityFactor * 5.0) + 5.0);
+
+        if ($reps < 5 || $reps > 10) {
+            throw new InvalidValueException('The provided probability number should be 5 to 10.');
+        }
+
+        return gmp_prob_prime($this->handle, $reps) !== 0;
     }
 
     public function isZero(): bool

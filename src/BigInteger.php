@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace PHP\Math\BigInteger;
 
+use PHP\Math\BigInteger\Exception\InvalidProbabilityFactorException;
 use PHP\Math\BigInteger\Exception\InvalidValueException;
 
 /**
@@ -43,6 +44,7 @@ interface BigInteger
      * of selection.
      *
      * @param int $k The number of elements to choose.
+     *
      * @return static A BigInteger instance representing the binomial coefficient.
      *
      * @throws InvalidValueException If $k is negative or greater than the current value of this BigInteger.
@@ -53,6 +55,7 @@ interface BigInteger
      * Performs a bitwise AND operation between this big integer and the given value.
      *
      * @param BigInteger $value The value to AND with.
+     *
      * @return static A BigInteger instance representing the result.
      */
     public function bitwiseAnd(BigInteger $value): static;
@@ -71,6 +74,7 @@ interface BigInteger
      * Performs a bitwise OR operation between this big integer and the given value.
      *
      * @param BigInteger $value The value to OR with.
+     *
      * @return static A BigInteger instance representing the result.
      */
     public function bitwiseOr(BigInteger $value): static;
@@ -79,6 +83,7 @@ interface BigInteger
      * Performs a bitwise XOR (exclusive OR) operation between this big integer and the given value.
      *
      * @param BigInteger $value The value to XOR with.
+     *
      * @return static A BigInteger instance representing the result.
      */
     public function bitwiseXor(BigInteger $value): static;
@@ -121,6 +126,7 @@ interface BigInteger
      * The difference with the modulo operation is that this returns the truncated remainder after dividing.
      *
      * @param BigInteger $value The divisor.
+     *
      * @return static A new BigInteger instance representing the remainder.
      *
      * @throws InvalidValueException If $value is zero.
@@ -142,10 +148,12 @@ interface BigInteger
      * @return static A BigInteger instance representing the result.
      */
     public function factorial(): static;
+
     /**
      * Computes the greatest common divisor (GCD) of this number and the given value.
      *
      * @param BigInteger $value The value to compute the GCD with.
+     *
      * @return static A new BigInteger instance representing the GCD.
      */
     public function greatestCommonDivisor(BigInteger $value): static;
@@ -156,6 +164,7 @@ interface BigInteger
      * The Hamming distance is the number of differing bits in the binary representation.
      *
      * @param BigInteger $value The value to compare with.
+     *
      * @return int The number of differing bits.
      */
     public function hammingDistance(BigInteger $value): int;
@@ -166,6 +175,7 @@ interface BigInteger
      * The result `x` satisfies: (this * x) ≡ 1 (mod $value).
      *
      * @param BigInteger $value The modulus.
+     *
      * @return static A new BigInteger instance representing the modular inverse.
      *
      * @throws InvalidValueException If no inverse exists.
@@ -215,6 +225,7 @@ interface BigInteger
      * Computes the Jacobi symbol (a/n).
      *
      * @param BigInteger $value The denominator n (must be odd and positive).
+     *
      * @return int Returns -1, 0, or 1 depending on the Jacobi symbol.
      */
     public function jacobi(BigInteger $value): int;
@@ -223,6 +234,7 @@ interface BigInteger
      * Computes the Kronecker symbol (a/n), a generalization of the Jacobi symbol.
      *
      * @param BigInteger $value The denominator n.
+     *
      * @return int Returns -1, 0, or 1 depending on the Kronecker symbol.
      */
     public function kronecker(BigInteger $value): int;
@@ -231,6 +243,7 @@ interface BigInteger
      * Computes the least common multiple (LCM) of this number and the given value.
      *
      * @param BigInteger $value The value to compute the LCM with.
+     *
      * @return static A new BigInteger instance representing the LCM.
      */
     public function leastCommonMultiple(BigInteger $value): static;
@@ -239,6 +252,7 @@ interface BigInteger
      * Computes the Legendre symbol (a/p).
      *
      * @param BigInteger $value The odd prime p.
+     *
      * @return int Returns -1, 0, or 1 depending on the Legendre symbol.
      */
     public function legendre(BigInteger $value): int;
@@ -247,18 +261,12 @@ interface BigInteger
      * Checks if the big integr is the prime number.
      *
      * @param float $probabilityFactor A normalized factor between 0 and 1 used for checking the probability.
+     *
      * @return bool Returns true if the number is a prime number false if not.
+     *
+     * @throws InvalidProbabilityFactorException Thrown if the probability factor is invalid.
      */
-    public function isPrimeNumber(float $probabilityFactor = 1.0): bool
-    {
-        $reps = (int)floor(($probabilityFactor * 5.0) + 5.0);
-
-        if ($reps < 5 || $reps > 10) {
-            throw new InvalidArgumentException('The provided probability number should be 5 to 10.');
-        }
-
-        return gmp_prob_prime($this->value, $reps) !== 0;
-    }
+    public function isPrimeNumber(float $probabilityFactor = 1.0): bool;
 
     /**
      * Multiplies this number by the given value.
@@ -305,6 +313,7 @@ interface BigInteger
      * Computes the integer n-th root of this number.
      *
      * @param int $nth The degree of the root (must be >= 2).
+     *
      * @return static A new BigInteger instance representing the n-th root.
      *
      * @throws InvalidValueException If $nth < 2.

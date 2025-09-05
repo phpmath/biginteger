@@ -9,10 +9,10 @@ declare(strict_types=1);
 
 namespace PHP\Math\BigInteger\Tests\ImmutableBigInteger;
 
+use PHP\Math\BigInteger\Exception\InvalidValueException;
+use PHP\Math\BigInteger\ImmutableBigInteger;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
-use PHP\Math\BigInteger\ImmutableBigInteger;
-use PHP\Math\BigInteger\Exception\InvalidValueException;
 
 #[CoversMethod(ImmutableBigInteger::class, 'invert')]
 final class ImmutableBigIntegerInvertTest extends TestCase

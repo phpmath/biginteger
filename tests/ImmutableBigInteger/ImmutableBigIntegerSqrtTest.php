@@ -20,37 +20,37 @@ final class ImmutableBigIntegerSqrtTest extends TestCase
     public function testImmutableSqrt(): void
     {
         // Arrange
-        $value = new ImmutableBigInteger("16");
+        $value = new ImmutableBigInteger('16');
 
         // Act
         $sqrt = $value->sqrt();
 
         // Assert
         static::assertInstanceOf(ImmutableBigInteger::class, $sqrt);
-        static::assertEquals("4", $sqrt->value());
-        static::assertEquals("16", $value->value(), 'Original value should remain unchanged');
+        static::assertEquals('4', $sqrt->value());
+        static::assertEquals('16', $value->value(), 'Original value should remain unchanged');
     }
 
     public function testSqrtOfNonPerfectSquare(): void
     {
         // Arrange
-        $value = new ImmutableBigInteger("20");
+        $value = new ImmutableBigInteger('20');
 
         // Act
         $sqrt = $value->sqrt();
 
         // Assert
-        static::assertEquals("4", $sqrt->value(), 'Integer square root should floor the result');
+        static::assertEquals('4', $sqrt->value(), 'Integer square root should floor the result');
     }
 
     public function testSqrtOfZeroAndOne(): void
     {
         // Arrange & Act
-        $zero = (new ImmutableBigInteger("0"))->sqrt();
-        $one = (new ImmutableBigInteger("1"))->sqrt();
+        $zero = (new ImmutableBigInteger('0'))->sqrt();
+        $one = (new ImmutableBigInteger('1'))->sqrt();
 
         // Assert
-        static::assertEquals("0", $zero->value());
-        static::assertEquals("1", $one->value());
+        static::assertEquals('0', $zero->value());
+        static::assertEquals('1', $one->value());
     }
 }

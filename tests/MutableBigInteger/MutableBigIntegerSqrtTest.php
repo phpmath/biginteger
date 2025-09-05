@@ -19,14 +19,14 @@ final class MutableBigIntegerSqrtTest extends TestCase
     public function testMutableSqrt(): void
     {
         // Arrange
-        $value = new MutableBigInteger("25");
+        $value = new MutableBigInteger('25');
 
         // Act
         $result = $value->sqrt();
 
         // Assert
         static::assertInstanceOf(MutableBigInteger::class, $result);
-        static::assertEquals("5", $value->value(), 'Mutable value should be modified');
+        static::assertEquals('5', $value->value(), 'Mutable value should be modified');
         static::assertSame($value, $result, 'Method should return $this for chaining');
     }
 }

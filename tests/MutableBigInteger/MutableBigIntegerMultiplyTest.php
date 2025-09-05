@@ -112,7 +112,10 @@ final class MutableBigIntegerMultiplyTest extends TestCase
 
         // Assert
         static::assertSame($bigint1, $result);
-        static::assertStringContainsString('121932631137021795226185032733622923332237463801111263526900', $bigint1->value());
+        static::assertStringContainsString(
+            '121932631137021795226185032733622923332237463801111263526900',
+            $bigint1->value(),
+        );
     }
 
     public function testMultiplyChaining(): void

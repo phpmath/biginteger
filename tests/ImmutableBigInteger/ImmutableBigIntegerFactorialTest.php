@@ -62,7 +62,7 @@ final class ImmutableBigIntegerFactorialTest extends TestCase
             $result = $bigint->factorial();
 
             // Assert
-            static::assertSame($expected, $result->value(), "Factorial of {$input} should be {$expected}");
+            static::assertSame($expected, $result->value());
         }
     }
 

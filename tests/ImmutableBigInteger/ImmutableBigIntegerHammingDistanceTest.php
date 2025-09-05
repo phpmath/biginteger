@@ -10,9 +10,9 @@ declare(strict_types=1);
 namespace PHP\Math\BigInteger\Tests\ImmutableBigInteger;
 
 use PHP\Math\BigInteger\Exception\InvalidValueException;
+use PHP\Math\BigInteger\ImmutableBigInteger;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
-use PHP\Math\BigInteger\ImmutableBigInteger;
 
 #[CoversMethod(ImmutableBigInteger::class, 'hammingDistance')]
 final class ImmutableBigIntegerHammingDistanceTest extends TestCase

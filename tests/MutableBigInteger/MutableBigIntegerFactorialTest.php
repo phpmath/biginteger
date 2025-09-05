@@ -62,7 +62,7 @@ final class MutableBigIntegerFactorialTest extends TestCase
 
             // Assert
             static::assertSame($bigint, $result);
-            static::assertSame($expected, $bigint->value(), "Factorial of {$input} should be {$expected}");
+            static::assertSame($expected, $bigint->value());
         }
     }
 

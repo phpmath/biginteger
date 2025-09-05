@@ -9,10 +9,10 @@ declare(strict_types=1);
 
 namespace PHP\Math\BigInteger\Tests\ImmutableBigInteger;
 
-use PHPUnit\Framework\Attributes\CoversMethod;
-use PHPUnit\Framework\TestCase;
 use PHP\Math\BigInteger\ImmutableBigInteger;
 use PHP\Math\BigInteger\ProbablePrime;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\TestCase;
 
 #[CoversMethod(ImmutableBigInteger::class, 'checkPrimeProbability')]
 final class ImmutableBigIntegerCheckPrimeProbabilityTest extends TestCase
@@ -39,7 +39,7 @@ final class ImmutableBigIntegerCheckPrimeProbabilityTest extends TestCase
         $result = $n->checkPrimeProbability();
 
         // Assert
-        static::assertContains($result, [ ProbablePrime::Yes, ProbablePrime::Maybe ]);
+        static::assertContains($result, [ProbablePrime::Yes, ProbablePrime::Maybe]);
     }
 
     public function testReturnsNoForCompositeNumber(): void
@@ -77,4 +77,3 @@ final class ImmutableBigIntegerCheckPrimeProbabilityTest extends TestCase
         static::assertSame(ProbablePrime::No, $one->checkPrimeProbability());
     }
 }
-

@@ -14,6 +14,9 @@ use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+use function fclose;
+use function fopen;
+
 #[CoversMethod(InvalidValueException::class, 'fromValue')]
 final class InvalidValueExceptionTest extends TestCase
 {

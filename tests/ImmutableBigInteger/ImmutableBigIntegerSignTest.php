@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace PHP\Math\BigInteger\Tests\ImmutableBigInteger;
 
 use PHP\Math\BigInteger\ImmutableBigInteger;
+use PHP\Math\BigInteger\Sign;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
@@ -25,7 +26,7 @@ final class ImmutableBigIntegerSignTest extends TestCase
         $result = $n->sign();
 
         // Assert
-        static::assertSame(\PHP\Math\BigInteger\Sign::Positive, $result);
+        static::assertSame(Sign::Positive, $result);
     }
 
     public function testSignNegative(): void
@@ -37,7 +38,7 @@ final class ImmutableBigIntegerSignTest extends TestCase
         $result = $n->sign();
 
         // Assert
-        static::assertSame(\PHP\Math\BigInteger\Sign::Negative, $result);
+        static::assertSame(Sign::Negative, $result);
     }
 
     public function testSignZero(): void
@@ -49,6 +50,6 @@ final class ImmutableBigIntegerSignTest extends TestCase
         $result = $n->sign();
 
         // Assert
-        static::assertSame(\PHP\Math\BigInteger\Sign::Zero, $result);
+        static::assertSame(Sign::Zero, $result);
     }
 }

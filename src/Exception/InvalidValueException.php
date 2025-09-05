@@ -11,6 +11,11 @@ namespace PHP\Math\BigInteger\Exception;
 
 use InvalidArgumentException;
 
+use function is_array;
+use function is_object;
+use function is_resource;
+use function sprintf;
+
 /**
  * The InvalidArgumentException class is thrown when an argument is not of the expected type.
  */
@@ -20,13 +25,12 @@ final class InvalidValueException extends InvalidArgumentException
      * Creates a new InvalidArgumentException for the given invalid value.
      *
      * @param mixed $value The invalid value that caused the exception.
-     * @return self
      */
     public static function fromValue(mixed $value): self
     {
         switch (true) {
             case is_object($value):
-                $value = get_class($value);
+                $value = $value::class;
                 break;
 
             case is_array($value):
