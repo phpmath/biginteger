@@ -2,31 +2,39 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
+[![CI][ico-ci]][link-ci]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 A PHP library to work with big integers. This library makes use of the GMP extension to
 do its calculations.
 
+## Documentation
+
+The full documentation is at https://phpmath.github.io/biginteger/. Every release is described on the [releases page](https://github.com/phpmath/biginteger/releases).
+
 ## Install
 
-Via Composer
-
-``` bash
-$ composer require phpmath/biginteger
+```bash
+composer require phpmath/biginteger
 ```
+
+## Requirements
+
+- PHP 8.4 or newer
+- The `gmp` extension
 
 ## Usage
 
-There are two ways to create a BigInteger. A mutable or immutable BigInteger.
+Every `BigInteger` is an immutable value object. Operations never change the instance they are
+called on, they return a new instance.
 
 ``` php
-$number = new PHP\Math\BigInteger\MutableBigInteger('8273467836243255543265432745');
-$number = new PHP\Math\BigInteger\ImmutableBigInteger('8273467836243255543265432745');
+$number = new PHPMath\BigInteger\BigInteger('8273467836243255543265432745');
 ```
 
 ```php
-$a = new PHP\Math\BigInteger\ImmutableBigInteger('12345678901234567890');
-$b = new PHP\Math\BigInteger\ImmutableBigInteger('98765432109876543210');
+$a = new PHPMath\BigInteger\BigInteger('12345678901234567890');
+$b = new PHPMath\BigInteger\BigInteger('98765432109876543210');
 
 $sum = $a->add($b);
 
@@ -61,35 +69,28 @@ This library provides a wide range of operations for working with big integers u
 - Find the next prime number.
 - Compute binomial coefficients.
 
+## Development
 
-## Change log
-
-We keep a changelog for every release, have a look at the [releases overview][link-releases-overview].
-
-## Testing
-
-``` bash
-$ composer test
-```
-
-To generate code coverage:
-
-``` bash
-$ composer test-coverage
+```bash
+composer test
+composer test-coverage
+composer analyse
+composer check-style
+composer fix-style
 ```
 
 ## Contributing
 
-All contributions are welcome. Feel free to create a PR or open an issue.
+All contributions are welcome. Open an issue or a pull request on GitHub. Please follow the coding standard and add tests.
 
 ## Security
 
-If you discover any security related issues, please create an issue in the issue tracker.
+If you discover a security issue, please create an issue in the issue tracker.
 
 ## Credits
 
-- [Walter Tamboer][link-author]
-- [All Contributors][link-contributors]
+- [Walter Tamboer](https://github.com/waltertamboer)
+- [All contributors](https://github.com/phpmath/biginteger/graphs/contributors)
 
 ## License
 
@@ -97,10 +98,9 @@ The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/phpmath/biginteger.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-ci]: https://img.shields.io/github/actions/workflow/status/phpmath/biginteger/ci.yml?branch=master&style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/phpmath/biginteger.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/phpmath/biginteger
+[link-ci]: https://github.com/phpmath/biginteger/actions/workflows/ci.yml
 [link-downloads]: https://packagist.org/packages/phpmath/biginteger/stats
-[link-author]: https://github.com/waltertamboer
-[link-contributors]: ../../contributors
-[link-releases-overview]: https://github.com/phpmath/biginteger/releases

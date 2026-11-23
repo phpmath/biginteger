@@ -7,19 +7,21 @@
 
 declare(strict_types=1);
 
-namespace PHP\Math\BigInteger\Exception;
+namespace PHPMath\BigInteger\Exception;
 
 use InvalidArgumentException;
 
+use function get_debug_type;
 use function is_array;
 use function is_object;
 use function is_resource;
+use function is_scalar;
 use function sprintf;
 
 /**
  * The InvalidArgumentException class is thrown when an argument is not of the expected type.
  */
-final class InvalidValueException extends InvalidArgumentException
+final class InvalidValueException extends InvalidArgumentException implements BigIntegerException
 {
     /**
      * Creates a new InvalidArgumentException for the given invalid value.
@@ -42,7 +44,7 @@ final class InvalidValueException extends InvalidArgumentException
                 break;
 
             default:
-                $value = (string)$value;
+                $value = is_scalar($value) ? (string)$value : get_debug_type($value);
                 break;
         }
 

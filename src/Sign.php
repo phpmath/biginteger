@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace PHP\Math\BigInteger;
+namespace PHPMath\BigInteger;
 
 /**
  * Represents the sign of a number.

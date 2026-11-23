@@ -7,14 +7,14 @@
 
 declare(strict_types=1);
 
-namespace PHP\Math\BigInteger\Exception;
+namespace PHPMath\BigInteger\Exception;
 
 use InvalidArgumentException;
 
 /**
  * The InvalidProbabilityFactorException exception is thrown when an invalid probability factor is provided.
  */
-final class InvalidProbabilityFactorException extends InvalidArgumentException
+final class InvalidProbabilityFactorException extends InvalidArgumentException implements BigIntegerException
 {
     /**
      * Creates a new InvalidProbabilityFactorException for the given invalid value.

@@ -19,21 +19,22 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": "^8.4",
         "ext-gmp": "*"
     },
     "require-dev": {
-        "phpmath/coding-standard": "^1.0",
-        "phpunit/phpunit": "^11.5"
+        "phpmath/coding-standard": "^2.0",
+        "phpstan/phpstan": "^2.3",
+        "phpunit/phpunit": "^13.4"
     },
     "autoload": {
         "psr-4": {
-            "PHP\\Math\\BigInteger\\": "src"
+            "PHPMath\\BigInteger\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHP\\Math\\BigInteger\\Tests\\": "tests"
+            "PHPMath\\BigInteger\\Tests\\": "tests/unit"
         }
     },
     "scripts": {
@@ -43,7 +44,8 @@
             "phpunit --coverage-html build/phpunit-coverage/"
         ],
         "check-style": "vendor/bin/phpcs",
-        "fix-style": "vendor/bin/phpcbf"
+        "fix-style": "vendor/bin/phpcbf",
+        "analyse": "vendor/bin/phpstan analyse --no-progress"
     },
     "config": {
         "optimize-autoloader": true,
@@ -51,9 +53,6 @@
         "sort-packages": true,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
-        },
-        "platform": {
-            "php": "8.2.0"
         }
     }
 }
