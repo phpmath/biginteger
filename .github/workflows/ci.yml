@@ -45,6 +45,7 @@ jobs:
           php -r '$m = simplexml_load_file("coverage/clover.xml")->project->metrics; $covered = (int) $m["coveredstatements"]; $total = (int) $m["statements"]; if ($covered !== $total) { fwrite(STDERR, "Coverage is $covered of $total statements\n"); exit(1); }'
 
       - name: Upload code coverage artifact
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v5
         with:
           name: phpunit-coverage-${{ matrix.php }}
